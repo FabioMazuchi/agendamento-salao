@@ -13,12 +13,40 @@ import usersRoutes from "./routes/users.js";
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(
-  cors({
-    origin: env.frontendUrl === "*" ? true : env.frontendUrl,
-    credentials: true,
-  }),
-);
+// app.use(
+//   cors({
+//     origin: env.frontendUrl === "*" ? true : env.frontendUrl,
+//     credentials: true,
+//   }),
+// );
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://salaomaosungidas.com.br',
+  'https://www.salaomaosungidas.com.br'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permite requisições sem Origin, como algumas chamadas diretas
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(
+      new Error(`Origem não permitida pelo CORS: ${origin}`)
+    );
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(
   "/api/auth",
