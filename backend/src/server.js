@@ -12,7 +12,6 @@ import usersRoutes from "./routes/users.js";
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const webRoot = path.resolve(__dirname, "../../frontend-dist");
 
 app.use(
   cors({
@@ -33,12 +32,6 @@ app.use("/api/public", publicRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/hairdresser", hairdresserRoutes);
 app.use("/api/users", usersRoutes);
-app.use(express.static(webRoot));
-app.get("*", (req, res, next) =>
-  req.path.startsWith("/api/")
-    ? next()
-    : res.sendFile(path.join(webRoot, "index.html")),
-);
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ message: "Erro interno do servidor." });
