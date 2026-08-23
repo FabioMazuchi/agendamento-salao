@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS salao_maos_ungidas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE IF NOT EXISTS salao_maos_ungidas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE salao_maos_ungidas;
+-- USE salao_maos_ungidas;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
