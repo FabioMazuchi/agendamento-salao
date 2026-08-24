@@ -1,5 +1,6 @@
 node_modules/
 .env
+.env copy
 frontend/dist/
 frontend-dist/
 *.log
