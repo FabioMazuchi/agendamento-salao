@@ -45,6 +45,8 @@ const corsOptions = {
   credentials: true
 };
 
+app.set("trust proxy", 1);
+
 // CORS DEVE VIR ANTES DAS ROTAS
 app.use(cors(corsOptions));
 
